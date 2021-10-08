@@ -1,4 +1,4 @@
-# Week 06 - Wednesday Activity
+# Week 06 - Yunhyeok Lee Activity
 
 ## Objectives: 
     1. Become familiar with different projection methods
@@ -14,7 +14,4 @@
     2.2 Population change from 1980 to 2010 (each pair, e.g. 1980 & 1990) in each town
     2.3 Color by County
   3. Make a GitHub based web page from the visualization
-  https://umassdgithub.github.io/week-6-Activity/
-# DataVisualization_Activity
-# DataVisualization_Activity
-# DataVisualization_Activity
+ 
