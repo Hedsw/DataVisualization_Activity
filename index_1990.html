@@ -37,7 +37,8 @@
 </head>
 
 <body>
-    <h2>by County </h2>
+    <h2>1990 by city</h2> 
+
     <div id="tooltip"></div>
     <script>
         /*-------------------------------------------------------*/
@@ -76,7 +77,7 @@
             // if topojson file is imported we need to 
             // convert topology data to geojson 
             const geojson = topojson.feature(topo_data, topo_data.objects.ma);
-            console.log(geojson)
+            
             //const filtered_data = geojson.filter(d=> { })
 
             /*-------------------------------------------------------*/
@@ -108,13 +109,13 @@
                 // if the data is scaled using log scale
             let logScale = d3.scaleLog()
                 .domain(d3.extent(geojson.features, (d) => {
-                    return d['properties']['POPCH2010']
+                    return d['properties']['POPCH2000'] // POPCH80_90  POPCH90_00
                 }))
 
             // if the data is scaled using linear scale
             let linearScale = d3.scaleLinear()
                 .domain(d3.extent(geojson.features, (d) => {
-                    return d['properties']['POPCH00_10'] // POPCH80_90  POPCH90_00
+                    return d['properties']['POPCH90_00']
                 }))
                 
             /*-------------------------------------------------------*/
@@ -132,23 +133,13 @@
                 .attr("height", "100vh");
             
             //let filtered_data = 
-            let lst =geojson.features.map(d=>d['properties']['FIPS_STCO']);
-                lst = new Set(lst);
-                lst = [...lst];
-            let FIPS = {}
-                lst.map((d,i)=>{
-                    FIPS[d] = colorInterpolator(i/14)}
-                )
-
 
             svg.selectAll("path")
-                .data(geojson.features)
                 .data(geojson.features)
                 .enter()
                 .append("path")
                 .attr("d", d => geoPath_generator(d))
-                .attr("fill", d => {return FIPS[d['properties']['FIPS_STCO'].toString()]
-            })
+                .attr("fill", d => colorInterpolator(linearScale(d['properties']['POPCH90_00'])))
                 
                 .on("mouseenter", (m, d) => {
                     tooltip.transition()
